@@ -28,3 +28,20 @@ def it_should_redirect_to_twitter_when_auth_clicked():
       auth_button = tool_content.find_by_css('#authenticate')
       auth_button.click()
   assert 'linkedin.com' in browser.url
+
+def it_should_redirect_to_the_tool_when_authorised():
+  # fill in linkedin username/pass
+  # auth
+  # check we're back to the tool settings page
+  pass
+
+def ensure_tool_tells_user_that_it_is_getting_data():
+  # check for a spinner?
+  pass
+
+def ensure_data_is_in_database():
+  # access sqlite endpoint, or view in table
+  pass
+
+# reload button?
+# cron?
