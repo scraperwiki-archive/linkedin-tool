@@ -27,4 +27,4 @@ def it_should_redirect_to_twitter_when_auth_clicked():
     with container.get_iframe(tool_content['name']) as tool_content:
       auth_button = tool_content.find_by_css('#authenticate')
       auth_button.click()
-      assert 'linkedin.com' in browser.url
+  assert 'linkedin.com' in browser.url
