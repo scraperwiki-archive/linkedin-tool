@@ -10,6 +10,7 @@
 
     <script src="https://x.scraperwiki.com/js/scraperwiki.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
+    <script src="vendor/js/jquery-io.js"></script>
     <script src="http://coffeescript.org/extras/coffee-script.js"></script>
   </head>
   <body>
@@ -19,10 +20,23 @@
          <button class="btn btn-primary" type="button" id="authenticate">Authenticate</button> with LinkedIn.
     </div>
     <script type="text/coffeescript">
-      $ ->
-        $('#authenticate').on 'click', ->
-          scraperwiki.tool.redirect 'http://www.linkedin.com'
-    </script>
+$ ->
+  # cat oauth_keys from box
+  scraperwiki.exec('cat ~/tool/oauth_keys.json').success (data) ->
+    keys = JSON.parse data
+    client_id = keys.apiKey
+    scraperwiki.tool.getURL (url) ->
+      params =
+        response_type: 'code'
+        client_id: client_id
+        state: 'abc'
+        redirect_uri: url
+      qs = $.io.object(params).query()
+      $('#authenticate').on 'click', ->
+        target = "https://www.linkedin.com/uas/oauth2/authorization?#{qs}"
+        scraperwiki.tool.redirect target
 
-  </body>
+        </script>
+
+      </body>
 </html>
