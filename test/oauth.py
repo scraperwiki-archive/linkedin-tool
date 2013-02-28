@@ -50,7 +50,3 @@ def ensure_tool_tells_user_that_it_is_authenticated():
     tool_content = container.find_by_css('iframe').first
     with container.get_iframe(tool_content['name']) as tool_content:
       assert tool_content.is_text_present('Authenticated', wait_time=7)
-
-def ensure_data_is_in_database():
-  # access sqlite endpoint, or view in table
-  pass
