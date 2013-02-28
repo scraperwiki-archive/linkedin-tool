@@ -6,6 +6,7 @@ from splinter import Browser
 browser = Browser()
 
 def setUp():
+  browser.cookies.delete()
   browser.visit('http://x.scraperwiki.com/dataset/fello3q/settings')
   browser.find_by_css('#username').fill(os.environ['X_INT_USER'])
   browser.find_by_css('#password').fill(os.environ['X_INT_PASS'])
@@ -34,10 +35,13 @@ def it_should_redirect_to_linkedin_when_auth_clicked():
   assert 'linkedin.com' in browser.url
 
 def it_should_redirect_to_the_tool_when_authorised():
-  # fill in linkedin username/pass
-  # auth
-  # check we're back to the tool settings page
-  pass
+  email = browser.find_by_xpath('//*[@id="session_key-oauth2SAuthorizeForm"]')
+  email.fill(os.environ['LINKEDIN_USER'])
+  password =  browser.find_by_xpath('//*[@id="session_password-oauth2SAuthorizeForm"]')
+  password.fill(os.environ['LINKEDIN_PASS'])
+
+  browser.find_by_name('authorize').click()
+  assert 'fello3q' in browser.url
 
 def ensure_tool_tells_user_that_it_is_getting_data():
   # check for a spinner?
