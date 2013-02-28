@@ -23,6 +23,7 @@ def ensure_authenticate_button_present_if_not_authed():
     tool_content = container.find_by_css('iframe').first
     with container.get_iframe(tool_content['name']) as tool_content:
       assert tool_content.is_element_present_by_css('#authenticate', wait_time=10)
+      tool_content.execute_script("scraperwiki.exec('rm access_token.json')")
 
 def it_should_redirect_to_linkedin_when_auth_clicked():
   container = browser.find_by_css('iframe').first
@@ -43,13 +44,13 @@ def it_should_redirect_to_the_tool_when_authorised():
   browser.find_by_name('authorize').click()
   assert 'fello3q' in browser.url
 
-def ensure_tool_tells_user_that_it_is_getting_data():
-  # check for a spinner?
-  pass
+def ensure_tool_tells_user_that_it_is_authenticated():
+  container = browser.find_by_css('iframe').first
+  with browser.get_iframe(container['name']) as container:
+    tool_content = container.find_by_css('iframe').first
+    with container.get_iframe(tool_content['name']) as tool_content:
+      assert tool_content.is_text_present('Authenticated', wait_time=7)
 
 def ensure_data_is_in_database():
   # access sqlite endpoint, or view in table
   pass
-
-# reload button?
-# cron?

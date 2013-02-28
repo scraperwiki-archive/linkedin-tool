@@ -14,8 +14,7 @@
     <script src="http://coffeescript.org/extras/coffee-script.js"></script>
   </head>
   <body>
-     <div class="settings" id="settings-auth">
-         <h2>Permission needed from LinkedIn</h2>
+     <div class="settings" id="settings-auth" display="none">
          <p>To import your data, please
          <button class="btn btn-primary" type="button" id="authenticate">Authenticate</button> with LinkedIn.
     </div>
@@ -50,7 +49,7 @@ $ ->
           access_qs = $.io.object(access_params).query()
           target = "https://api.linkedin.com/uas/oauth2/accessToken?#{access_qs}"
           scraperwiki.exec "curl #{scraperwiki.shellEscape(target)} > access_token.json", (data) ->
-            console.log "SAVED"
+            alertAuthenticated()
         else if params.error and params.state
           console.log "GOT ERROR #{qs}"
           # Some sort of error (from LinkedIn).
@@ -64,6 +63,7 @@ $ ->
         # just been installed.
         scraperwiki.exec("cat 2>/dev/null access_token.json").success (data) ->
           if not data.length
+            $('#settings-auth').show()
             # Don't have access_tokens yet, so start the process
             # of getting them.
             params =
@@ -76,8 +76,11 @@ $ ->
               target = "https://www.linkedin.com/uas/oauth2/authorization?#{qs}"
               scraperwiki.tool.redirect target
           else
-            scraperwiki.alert "Authenticated", "Scraping your LinkedIn (not really)"
+            alertAuthenticated()
 
+alertAuthenticated = ->
+  $('#settings-auth').hide()
+  scraperwiki.alert "Authenticated", "Reading data from LinkedIn"
         </script>
 
       </body>
