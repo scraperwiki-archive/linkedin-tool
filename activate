@@ -1,0 +1,2 @@
+. ../swops-secret/keys.sh
+. bin/activate
