@@ -1,5 +1,8 @@
 import os
+import time
+
 from splinter import Browser
+
 browser = Browser()
 
 def setUp():
@@ -26,6 +29,7 @@ def it_should_redirect_to_twitter_when_auth_clicked():
     tool_content = container.find_by_css('iframe').first
     with container.get_iframe(tool_content['name']) as tool_content:
       auth_button = tool_content.find_by_css('#authenticate')
+      time.sleep(1)
       auth_button.click()
   assert 'linkedin.com' in browser.url
 
