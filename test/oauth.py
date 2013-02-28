@@ -23,7 +23,7 @@ def ensure_authenticate_button_present_if_not_authed():
     with container.get_iframe(tool_content['name']) as tool_content:
       assert tool_content.is_element_present_by_css('#authenticate', wait_time=10)
 
-def it_should_redirect_to_twitter_when_auth_clicked():
+def it_should_redirect_to_linkedin_when_auth_clicked():
   container = browser.find_by_css('iframe').first
   with browser.get_iframe(container['name']) as container:
     tool_content = container.find_by_css('iframe').first
