@@ -69,6 +69,7 @@ $ ->
             params =
               response_type: 'code'
               client_id: client_id
+              scope: 'r_network'
               state: 'abc'
               redirect_uri: url
             qs = $.io.object(params).query()

@@ -6,6 +6,7 @@ lxml==3.1.0
 nose==1.2.1
 oauth2==1.5.211
 pinocchio==0.3
+requests
 scraperwiki
 selenium==2.30.0
 specloud==0.4.5
