@@ -23,12 +23,11 @@ def main(argv=None):
     for k,v in opts:
         if k == '--limit':
             limit = int(v)
-    scraperwiki.sqlite.execute("""CREATE TABLE IF NOT EXISTS 
-      people (id, scraped)""")
-
     do_work(limit)
 
 def do_work(limit):
+    scraperwiki.sqlite.execute("""CREATE TABLE IF NOT EXISTS 
+      people (id, scraped)""")
     access_token = json.load(open('access_token.json'))['access_token']
     worklist = scraperwiki.sqlite.select(
       """* FROM source LEFT JOIN people

@@ -1,6 +1,7 @@
 import os
 
 import scraperwiki
+import vcr
 
 def setUp():
   os.system('python code/namestodb.py < people')
@@ -8,5 +9,8 @@ def setUp():
   scraperwiki.sqlite.execute('DROP TABLE people')
 
 def ensure_seeker_find_people():
-  people = list(scraperwiki.sqlite.select("* from people"))
-  assert people
+  with vcr.use_cassette('fixtures/people.yaml'):
+    from code import seeker
+    seeker.do_work(1)
+    people = list(scraperwiki.sqlite.select("* from people"))
+    assert len(people)
