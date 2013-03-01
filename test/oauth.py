@@ -17,12 +17,13 @@ def ensure_i_am_on_the_settings_page():
   assert browser.is_text_present('Settings', wait_time=10)
   assert browser.is_text_present('LinkedIn', wait_time=10)
 
-def ensure_authenticate_button_present_if_not_authed():
+def ensure_there_is_a_textarea():
   container = browser.find_by_css('iframe').first
   with browser.get_iframe(container['name']) as container:
     tool_content = container.find_by_css('iframe').first
     with container.get_iframe(tool_content['name']) as tool_content:
-      assert tool_content.is_element_present_by_css('#authenticate', wait_time=10)
+      assert tool_content.is_element_present_by_css('textarea', wait_time=10)
+      # TODO: move
       tool_content.execute_script("scraperwiki.exec('rm access_token.json')")
 
 def it_should_redirect_to_linkedin_when_auth_clicked():
@@ -33,6 +34,7 @@ def it_should_redirect_to_linkedin_when_auth_clicked():
       auth_button = tool_content.find_by_css('#authenticate')
       time.sleep(1)
       auth_button.click()
+  time.sleep(1)
   assert 'linkedin.com' in browser.url
 
 def it_should_redirect_to_the_tool_when_authorised():

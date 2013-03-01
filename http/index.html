@@ -5,7 +5,7 @@
     <title>LinkedIn creeper tool</title>
     <meta http-equiv="cleartype" content="on">
     <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendor/css/scraperstrap.css">
+    <link rel="stylesheet" href="//x.scraperwiki.com/style/scraperwiki.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 
     <script src="https://x.scraperwiki.com/js/scraperwiki.js"></script>
@@ -14,29 +14,61 @@
     <script src="http://coffeescript.org/extras/coffee-script.js"></script>
   </head>
   <body>
-     <div class="settings" id="settings-auth" display="none">
-         <p>To import your data, please
-         <button class="btn btn-primary" type="button" id="authenticate">Authenticate</button> with LinkedIn.
-    </div>
+     <form>
+         <p>
+           <textarea></textarea>
+         </p>
+         <p>
+           <button class="btn btn-primary" type="button" id="authenticate">Import</button>
+         </p>
+     </form>
     <div>
     </div>
     <script type="text/coffeescript">
 
 requestAccessToken = ->
   grant_type: authorization_code
-$ ->
-  # cat oauth_keys from box
+
+getClientIdAndSecret = (callback) ->
   scraperwiki.exec('cat ~/tool/oauth_keys.json').success (data) ->
     keys = JSON.parse data
-    client_id = keys.apiKey
-    client_secret = keys.secretKey
-    scraperwiki.tool.getURL (url) ->
-      qs = url.match(/[?](.*)/)
-      if qs?
-        qs = qs[1]
-        console.log "GOT QS #{qs}"
-        params = $.io.query(qs).object()
-        if params.code and params.state
+    callback null, {id: keys.apiKey, secret: keys.secretKey}
+
+$ ->
+  importNames = (callback) ->
+    scraperwiki.exec("cat 2>/dev/null access_token.json").success (data) ->
+      if not data.length
+        # Don't have access_tokens yet, so start the process
+        # of getting them.
+        getClientIdAndSecret (err, keys) ->
+          scraperwiki.tool.getURL (url) ->
+            params =
+              response_type: 'code'
+              client_id: keys.id
+              scope: 'r_network'
+              state: 'abc'
+              redirect_uri: url
+            qs = $.io.object(params).query()
+            target = "https://www.linkedin.com/uas/oauth2/authorization?#{qs}"
+            scraperwiki.tool.redirect target
+      else
+        runSeeker()
+
+  $('#authenticate').on 'click', ->
+    $(@).addClass('loading').text('Importing')
+    importNames()
+    escapedNames = scraperwiki.shellEscape $('textarea').val()
+    scraperwiki.exec("echo #{escapedNames} | python tool/code/namestodb.py")
+
+  scraperwiki.tool.getURL (url) ->
+    qs = url.match(/[?](.*)/)
+    if qs?
+      # Redirected from LinkedIn
+      qs = qs[1]
+      console.log "GOT QS #{qs}"
+      params = $.io.query(qs).object()
+      if params.code and params.state
+        getClientIdAndSecret (err, keys) ->
           console.log "GOT CODE #{qs}"
           # LinkedIn have redirected back here.
           redirect_url = url.match(/(.*?)[?]/)[1]
@@ -44,43 +76,29 @@ $ ->
             grant_type: 'authorization_code'
             code: params.code
             redirect_uri: redirect_url
-            client_id: client_id
-            client_secret: client_secret
+            client_id: keys.id
+            client_secret: keys.secret
           access_qs = $.io.object(access_params).query()
           target = "https://api.linkedin.com/uas/oauth2/accessToken?#{access_qs}"
-          scraperwiki.exec "curl #{scraperwiki.shellEscape(target)} > access_token.json", (data) ->
-            alertAuthenticated()
-        else if params.error and params.state
-          console.log "GOT ERROR #{qs}"
-          # Some sort of error (from LinkedIn).
-          scraperwiki.alert params.error, params.description, true
-        else
-          scraperwiki.alert "Mysterious params", "WAT?", true
+          scraperwiki.exec "curl #{scraperwiki.shellEscape(target)} > access_token.json", ->
+            runSeeker()
+            # TODO: cron job, show loading button
+      else if params.error and params.state
+        console.log "GOT ERROR #{qs}"
+        # Some sort of error (from LinkedIn).
+        scraperwiki.alert params.error, params.description, true
       else
-        console.log "GOT no query parameters"
-        # No query params, so we haven't been redirected here.
-        # Must be viewing the tool settings, possibly having
-        # just been installed.
-        scraperwiki.exec("cat 2>/dev/null access_token.json").success (data) ->
-          if not data.length
-            $('#settings-auth').show()
-            # Don't have access_tokens yet, so start the process
-            # of getting them.
-            params =
-              response_type: 'code'
-              client_id: client_id
-              scope: 'r_network'
-              state: 'abc'
-              redirect_uri: url
-            qs = $.io.object(params).query()
-            $('#authenticate').on 'click', ->
-              target = "https://www.linkedin.com/uas/oauth2/authorization?#{qs}"
-              scraperwiki.tool.redirect target
-          else
-            alertAuthenticated()
+        scraperwiki.alert "Mysterious params", "WAT?", true
+    else
+      console.log "GOT no query parameters"
+      # No query params, so we haven't been redirected here.
+      # Must be viewing the tool settings, possibly having
+      # just been installed.
+
+runSeeker = ->
+  scraperwiki.exec "tool/code/seeker.py --limit 100"
 
 alertAuthenticated = ->
-  $('#settings-auth').hide()
   scraperwiki.alert "Authenticated", "Reading data from LinkedIn"
         </script>
 
