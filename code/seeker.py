@@ -86,8 +86,6 @@ def save_first_person(source_id, xml):
         public_profile_url = text_or_none('public-profile-url', person),
         picture_url = text_or_none('picture-url', person)
       )
-      sys.stderr.write('id: ' + row['id'] + '\n')
-      sys.stderr.write('name:' + row['name'] + '\n')
       if row['id'] not in ['', 'private']:
         scraperwiki.sqlite.save(['id'], row, 'people')
         break
