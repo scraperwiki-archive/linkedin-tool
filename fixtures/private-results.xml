@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<people-search>
+  <people total="32" count="10" start="0">
+    <person>
+      <id>private</id>
+      <first-name>private</first-name>
+      <last-name>private</last-name>
+      <headline>Partnership Manager at Salvation Army Housing Association</headline>
+      <distance>-1</distance>
+      <num-connections>256</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>United Kingdom</name>
+        <country>
+          <code>gb</code>
+        </country>
+      </location>
+      <industry>Civic &amp; Social Organization</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>Salvation Army Housing Association</name>
+            <type>Nonprofit</type>
+            <size>51-200 employees</size>
+            <industry>Civic &amp; Social Organization</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/6/83/504</public-profile-url>
+    </person>
+    <person>
+      <id>private</id>
+      <first-name>private</first-name>
+      <last-name>private</last-name>
+      <headline>Senior Editor at MidCountry Media, Inc.</headline>
+      <distance>-1</distance>
+      <num-connections>275</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Indianapolis, Indiana Area</name>
+        <country>
+          <code>us</code>
+        </country>
+      </location>
+      <industry>Newspapers</industry>
+      <positions total="2">
+        <position>
+          <company>
+            <name>Farm World</name>
+            <industry>Newspapers</industry>
+          </company>
+        </position>
+        <position>
+          <company>
+            <name>MidCountry Media, Inc.</name>
+            <type>Privately Held</type>
+            <size>51-200 employees</size>
+            <industry>Newspapers</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/12/37a/b34</public-profile-url>
+      <picture-url>http://m3.licdn.com/mpr/mprx/0_Pk_hA9OA-lXOnBCgl8tPAN7rrc8AqqigA_BxANg2flN3IKqj0CP2xqdGOVhaB1GltbTOO1fNcIOB</picture-url>
+    </person>
+    <person>
+      <id>bIrzb9KIPG</id>
+      <first-name>Chris</first-name>
+      <last-name>Jones</last-name>
+      <headline>Innovation Technology Manager at Medilink North West Ltd</headline>
+      <distance>-1</distance>
+      <num-connections>108</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>United Kingdom</name>
+        <country>
+          <code>gb</code>
+        </country>
+      </location>
+      <industry>Medical Devices</industry>
+      <positions total="2">
+        <position>
+          <company>
+            <name>Medilink North West Ltd</name>
+            <type>Nonprofit</type>
+            <industry>Medical Devices</industry>
+          </company>
+        </position>
+        <position>
+          <company>
+            <name>Medilink North West</name>
+            <industry>Medical Devices</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/16/97a/2b7</public-profile-url>
+    </person>
+    <person>
+      <id>noSV_8dEY9</id>
+      <first-name>David</first-name>
+      <last-name>Blower</last-name>
+      <headline>Chief Financial Officer at The DPSA Group</headline>
+      <distance>-1</distance>
+      <num-connections>389</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Brisbane Area, Australia</name>
+        <country>
+          <code>au</code>
+        </country>
+      </location>
+      <industry>Mining &amp; Metals</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>The DPSA Group</name>
+            <type>Privately Held</type>
+            <size>201-500 employees</size>
+            <industry>Mining &amp; Metals</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/15/a80/852</public-profile-url>
+      <picture-url>http://m3.licdn.com/mpr/mprx/0_xjj5Wt9sXfi3GEaL0OSVWATnXoNSCu7LgMdVWA6FRu8ggHZ51RDWFltdoFqt3wmdYO0UQnZRtQRs</picture-url>
+    </person>
+    <person>
+      <id>2O7ZDIBp5f</id>
+      <first-name>David</first-name>
+      <last-name>Blower</last-name>
+      <headline>Assistant Regional Counsel at Social Security Administration</headline>
+      <distance>-1</distance>
+      <num-connections>76</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Greater Denver Area</name>
+        <country>
+          <code>us</code>
+        </country>
+      </location>
+      <industry>Law Practice</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>Social Security Administration</name>
+            <type>Government Agency</type>
+            <size>1001-5000 employees</size>
+            <industry>Government Administration</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/3/762/3ab</public-profile-url>
+    </person>
+    <person>
+      <id>nx3bwARHOR</id>
+      <first-name>David</first-name>
+      <last-name>Blower</last-name>
+      <headline>Sales Manager at Voicepath</headline>
+      <distance>-1</distance>
+      <num-connections>85</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Coventry, United Kingdom</name>
+        <country>
+          <code>gb</code>
+        </country>
+      </location>
+      <industry>Information Technology and Services</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>Voicepath</name>
+            <type>Privately Held</type>
+            <industry>Information Technology and Services</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/4/85/664</public-profile-url>
+      <picture-url>http://m3.licdn.com/mpr/mprx/0_W1fpiDzyJUUW1_XqFNOfim6-MxyIl5vqIqR_imF2QseRm3CNLz0rSaPGBApq-CN4erDG2dzunwZ2</picture-url>
+    </person>
+    <person>
+      <id>o7greJF9eL</id>
+      <first-name>David</first-name>
+      <last-name>Blower</last-name>
+      <headline>Group Finance Director at Jephson Housing Association Group</headline>
+      <distance>-1</distance>
+      <num-connections>31</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Coventry, United Kingdom</name>
+        <country>
+          <code>gb</code>
+        </country>
+      </location>
+      <industry>Nonprofit Organization Management</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>Jephson Housing Association Group</name>
+            <industry>Nonprofit Organization Management</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/13/578/825</public-profile-url>
+    </person>
+    <person>
+      <id>z0T6iFg3Es</id>
+      <first-name>David</first-name>
+      <last-name>Blower</last-name>
+      <headline>Associate, Project Director/Senior Archaeologist at Golder Associates Ltd.</headline>
+      <distance>-1</distance>
+      <num-connections>76</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Calgary, Canada Area</name>
+        <country>
+          <code>ca</code>
+        </country>
+      </location>
+      <industry>Environmental Services</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>Golder Associates Ltd.</name>
+            <type>Privately Held</type>
+            <industry>Environmental Services</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/14/86b/949</public-profile-url>
+      <picture-url>http://m3.licdn.com/mpr/mprx/0_UiHHf62i50gfRITHUhIRf5wmFpomUIrHMGpBf5Iy4sOYk7FecL4XTLxtdAEl42AXsho9hGz5-a9l</picture-url>
+    </person>
+    <person>
+      <id>oZlwnbDTxs</id>
+      <first-name>David</first-name>
+      <last-name>Blower</last-name>
+      <headline>Business Development Manager at MIDAS</headline>
+      <distance>-1</distance>
+      <num-connections>16</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Manchester, United Kingdom</name>
+        <country>
+          <code>gb</code>
+        </country>
+      </location>
+      <industry>Public Policy</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>MIDAS</name>
+            <industry>Public Policy</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/9/472/b7a</public-profile-url>
+    </person>
+    <person>
+      <id>-0bv68x5tb</id>
+      <first-name>David</first-name>
+      <last-name>Blower</last-name>
+      <headline>PRESIDENT at CPM LANDSCAPING, INC. and Owner, CPM LANDSCAPING, INC.</headline>
+      <distance>-1</distance>
+      <num-connections>62</num-connections>
+      <num-connections-capped>false</num-connections-capped>
+      <location>
+        <name>Greater Philadelphia Area</name>
+        <country>
+          <code>us</code>
+        </country>
+      </location>
+      <industry>Construction</industry>
+      <positions total="1">
+        <position>
+          <company>
+            <name>CPM LANDSCAPING, INC.</name>
+            <industry>Consumer Services</industry>
+          </company>
+        </position>
+      </positions>
+      <public-profile-url>http://www.linkedin.com/pub/david-blower/3/954/bb9</public-profile-url>
+      <picture-url>http://m3.licdn.com/mpr/mprx/0_0-CI4PB7T_PmAM280vG44A6YiiNuPVg8jnnN4AXfp58yuYEhPqtFnlK3DaqPrjyuOA8zcnnoYrlT</picture-url>
+    </person>
+  </people>
+</people-search>

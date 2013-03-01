@@ -11,7 +11,7 @@ import getopt
 import json
 import sys
 import urllib
-import urllib2
+import requests
 from datetime import datetime
 from lxml import html
 
@@ -59,12 +59,11 @@ def do_work(limit):
           "picture-url")
         baseurl = "https://api.linkedin.com/v1/people-search:(people:(%s))" % fields
         url = baseurl + '?' + urllib.urlencode(params)
-        # TODO: vcr should stop urllib from actually making a connection here!
-        r = None
-        r = urllib2.urlopen(url)
-        save_first_person(source_id=person['source_id'], xml=r.read())
+        r = requests.get(url)
+        save_first_person(source_id=person['source_id'], xml=r.content)
 
 def save_first_person(source_id, xml):
+  # open('search-results.xml','w').write(xml)
   doc = html.fromstring(xml)
   for person in doc.cssselect("person"):
       row = dict(
@@ -87,8 +86,8 @@ def save_first_person(source_id, xml):
         public_profile_url = text_or_none('public-profile-url', person),
         picture_url = text_or_none('picture-url', person)
       )
-      sys.stderr.write(row['id'])
-      sys.stderr.write(row['name'])
+      sys.stderr.write('id: ' + row['id'] + '\n')
+      sys.stderr.write('name:' + row['name'] + '\n')
       if row['id'] not in ['', 'private']:
         scraperwiki.sqlite.save(['id'], row, 'people')
         break
