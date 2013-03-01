@@ -1,7 +1,12 @@
 import os
+import vcr
 
 import scraperwiki
-import vcr
+
+from nose.tools import assert_equals
+
+from code import seeker
+
 
 def setUp():
   os.system('python code/namestodb.py < people')
@@ -10,7 +15,13 @@ def setUp():
 
 def ensure_seeker_finds_people():
   with vcr.use_cassette('fixtures/people.yaml'):
-    from code import seeker
     seeker.do_work(1)
     people = list(scraperwiki.sqlite.select("* from people"))
     assert len(people)
+    assert_equals('Mavid Blower', people[0]['name'])
+
+def ensure_seeker_only_saves_users_with_full_details():
+  with vcr.use_cassette('fixtures/private_people.yaml'):
+    seeker.do_work(1)
+    people = list(scraperwiki.sqlite.select("* from people"))
+    assert_equals('David Blower', people[0]['name'])

@@ -59,42 +59,46 @@ def do_work(limit):
           "picture-url")
         baseurl = "https://api.linkedin.com/v1/people-search:(people:(%s))" % fields
         url = baseurl + '?' + urllib.urlencode(params)
-        r = urllib2.urlopen(url).read()
-        save_first_person(source_id=person['source_id'], xml=r)
+        # TODO: vcr should stop urllib from actually making a connection here!
+        r = None
+        r = urllib2.urlopen(url)
+        save_first_person(source_id=person['source_id'], xml=r.read())
 
 def save_first_person(source_id, xml):
   doc = html.fromstring(xml)
-  person = doc.cssselect("person")[0]
-  # TODO: don't save private/empty IDs
-  row = dict(
-    id = person.cssselect('id')[0].text,
-    source_id = source_id,
-    scraped = datetime.now(),
-    name = "%s %s" % (text_or_none('first-name', person), text_or_none('last-name', person)),
-    headline = text_or_none('headline', person),
-    distance = text_or_none('distance', person),
-    num_connections = text_or_none('num-connections', person),
-    num_connections_capped = text_or_none('num-connections-capped', person),
-    location_name = text_or_none('location name', person),
-    location_country_code = text_or_none('location country code', person),
-    industry = text_or_none('industry', person),
-    company_name = text_or_none('positions name', person),
-    company_type = text_or_none('positions type', person),
-    company_size = text_or_none('positions size', person),
-    company_industry = text_or_none('positions industry', person),
-    company_ticker = text_or_none('positions ticker', person),
-    public_profile_url = text_or_none('public-profile-url', person),
-    picture_url = text_or_none('picture-url', person)
-  )
-  scraperwiki.sqlite.save(['id'], row, 'people')
+  for person in doc.cssselect("person"):
+      row = dict(
+        id = text_or_none('id', person),
+        source_id = source_id,
+        scraped = datetime.now(),
+        name = "%s %s" % (text_or_none('first-name', person), text_or_none('last-name', person)),
+        headline = text_or_none('headline', person),
+        distance = text_or_none('distance', person),
+        num_connections = text_or_none('num-connections', person),
+        num_connections_capped = text_or_none('num-connections-capped', person),
+        location_name = text_or_none('location name', person),
+        location_country_code = text_or_none('location country code', person),
+        industry = text_or_none('industry', person),
+        company_name = text_or_none('positions name', person),
+        company_type = text_or_none('positions type', person),
+        company_size = text_or_none('positions size', person),
+        company_industry = text_or_none('positions industry', person),
+        company_ticker = text_or_none('positions ticker', person),
+        public_profile_url = text_or_none('public-profile-url', person),
+        picture_url = text_or_none('picture-url', person)
+      )
+      sys.stderr.write(row['id'])
+      sys.stderr.write(row['name'])
+      if row['id'] not in ['', 'private']:
+        scraperwiki.sqlite.save(['id'], row, 'people')
+        break
 
 def text_or_none(selector, doc):
     element = doc.cssselect(selector)
     if len(element) > 0:
       return element[0].text
     else:
-      return None
-
+      return ''
 
 if __name__ == '__main__':
     main()
