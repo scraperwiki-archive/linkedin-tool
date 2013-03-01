@@ -1,7 +1,7 @@
 - request:
     body: null
-    headers: {Connection: close, Host: api.linkedin.com, User-Agent: Python-urllib/2.7}
     method: GET
+    headers: {Connection: close, Host: api.linkedin.com, User-Agent: Python-urllib/2.7}
     url: /v1/people-search:(people:(id,first-name,last-name,headline,distance,num-connections,num-connections-capped,location:(name,country:(code)),industry,positions:(company:(name,type,size,industry,ticker)),public-profile-url,picture-url))?first-name=David&last-name=Blower&oauth2_access_token=fake
   response:
     body: {string: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n\
@@ -128,3 +128,147 @@
         GMT', server: Apache-Coyote/1.1, transfer-encoding: chunked, vary: '*', x-li-format: xml,
       x-li-request-id: RVLXUUEXNW}
     status: {code: 200, message: OK}
+- request:
+    body: null
+    headers: {Connection: close, Host: api.linkedin.com, User-Agent: Python-urllib/2.7}
+    method: GET
+    url: /v1/people-search:(people:(id,first-name,last-name,headline,distance,num-connections,num-connections-capped,location:(name,country:(code)),industry,positions:(company:(name,type,size,industry,ticker)),public-profile-url,picture-url))?first-name=David&last-name=Blower&oauth2_access_token=AQUgjpjBeNnOiRepO0e2AzVgBHNXW9y13PAtp7ofXZl7coRgMV3EK2J58KFnps_y-SFIz8LGMILvPWH0e2bIHQE4LfTfo1oBSAXc-Q0iKb1Ti5w3mZDZzcQMJjBJSORvMxyCfrGPtPAu5vrFzkGoAxXKi_6kfwafdELVC-chvTiHFpmm2UQ
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n\
+        <people-search>\n  <people total=\"32\" count=\"10\" start=\"0\">\n    <person>\n\
+        \      <id>4BPLZiPRZ-</id>\n      <first-name>David</first-name>\n      <last-name>Blower</last-name>\n\
+        \      <headline>Partnership Manager at Salvation Army Housing Association</headline>\n\
+        \      <distance>-1</distance>\n      <num-connections>256</num-connections>\n\
+        \      <num-connections-capped>false</num-connections-capped>\n      <location>\n\
+        \        <name>United Kingdom</name>\n        <country>\n          <code>gb</code>\n\
+        \        </country>\n      </location>\n      <industry>Civic &amp; Social\
+        \ Organization</industry>\n      <positions total=\"1\">\n        <position>\n\
+        \          <company>\n            <name>Salvation Army Housing Association</name>\n\
+        \            <type>Nonprofit</type>\n            <size>51-200 employees</size>\n\
+        \            <industry>Civic &amp; Social Organization</industry>\n      \
+        \    </company>\n        </position>\n      </positions>\n      <public-profile-url>http://www.linkedin.com/pub/david-blower/6/83/504</public-profile-url>\n\
+        \    </person>\n    <person>\n      <id>Pg_k9p_PNf</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Senior Editor at MidCountry\
+        \ Media, Inc.</headline>\n      <distance>-1</distance>\n      <num-connections>275</num-connections>\n\
+        \      <num-connections-capped>false</num-connections-capped>\n      <location>\n\
+        \        <name>Indianapolis, Indiana Area</name>\n        <country>\n    \
+        \      <code>us</code>\n        </country>\n      </location>\n      <industry>Newspapers</industry>\n\
+        \      <positions total=\"2\">\n        <position>\n          <company>\n\
+        \            <name>Farm World</name>\n            <industry>Newspapers</industry>\n\
+        \          </company>\n        </position>\n        <position>\n         \
+        \ <company>\n            <name>MidCountry Media, Inc.</name>\n           \
+        \ <type>Privately Held</type>\n            <size>51-200 employees</size>\n\
+        \            <industry>Newspapers</industry>\n          </company>\n     \
+        \   </position>\n      </positions>\n      <public-profile-url>http://www.linkedin.com/pub/david-blower/12/37a/b34</public-profile-url>\n\
+        \      <picture-url>http://m3.licdn.com/mpr/mprx/0_Pk_hA9OA-lXOnBCgl8tPAN7rrc8AqqigA_BxANg2flN3IKqj0CP2xqdGOVhaB1GltbTOO1fNcIOB</picture-url>\n\
+        \    </person>\n    <person>\n      <id>bIrzb9KIPG</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Innovation Technology\
+        \ Manager at Medilink North West Ltd</headline>\n      <distance>-1</distance>\n\
+        \      <num-connections>108</num-connections>\n      <num-connections-capped>false</num-connections-capped>\n\
+        \      <location>\n        <name>United Kingdom</name>\n        <country>\n\
+        \          <code>gb</code>\n        </country>\n      </location>\n      <industry>Medical\
+        \ Devices</industry>\n      <positions total=\"2\">\n        <position>\n\
+        \          <company>\n            <name>Medilink North West Ltd</name>\n \
+        \           <type>Nonprofit</type>\n            <industry>Medical Devices</industry>\n\
+        \          </company>\n        </position>\n        <position>\n         \
+        \ <company>\n            <name>Medilink North West</name>\n            <industry>Medical\
+        \ Devices</industry>\n          </company>\n        </position>\n      </positions>\n\
+        \      <public-profile-url>http://www.linkedin.com/pub/david-blower/16/97a/2b7</public-profile-url>\n\
+        \    </person>\n    <person>\n      <id>noSV_8dEY9</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Chief Financial Officer\
+        \ at The DPSA Group</headline>\n      <distance>-1</distance>\n      <num-connections>389</num-connections>\n\
+        \      <num-connections-capped>false</num-connections-capped>\n      <location>\n\
+        \        <name>Brisbane Area, Australia</name>\n        <country>\n      \
+        \    <code>au</code>\n        </country>\n      </location>\n      <industry>Mining\
+        \ &amp; Metals</industry>\n      <positions total=\"1\">\n        <position>\n\
+        \          <company>\n            <name>The DPSA Group</name>\n          \
+        \  <type>Privately Held</type>\n            <size>201-500 employees</size>\n\
+        \            <industry>Mining &amp; Metals</industry>\n          </company>\n\
+        \        </position>\n      </positions>\n      <public-profile-url>http://www.linkedin.com/pub/david-blower/15/a80/852</public-profile-url>\n\
+        \      <picture-url>http://m3.licdn.com/mpr/mprx/0_xjj5Wt9sXfi3GEaL0OSVWATnXoNSCu7LgMdVWA6FRu8ggHZ51RDWFltdoFqt3wmdYO0UQnZRtQRs</picture-url>\n\
+        \    </person>\n    <person>\n      <id>2O7ZDIBp5f</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Assistant Regional Counsel\
+        \ at Social Security Administration</headline>\n      <distance>-1</distance>\n\
+        \      <num-connections>76</num-connections>\n      <num-connections-capped>false</num-connections-capped>\n\
+        \      <location>\n        <name>Greater Denver Area</name>\n        <country>\n\
+        \          <code>us</code>\n        </country>\n      </location>\n      <industry>Law\
+        \ Practice</industry>\n      <positions total=\"1\">\n        <position>\n\
+        \          <company>\n            <name>Social Security Administration</name>\n\
+        \            <type>Government Agency</type>\n            <size>1001-5000 employees</size>\n\
+        \            <industry>Government Administration</industry>\n          </company>\n\
+        \        </position>\n      </positions>\n      <public-profile-url>http://www.linkedin.com/pub/david-blower/3/762/3ab</public-profile-url>\n\
+        \    </person>\n    <person>\n      <id>nx3bwARHOR</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Sales Manager at Voicepath</headline>\n\
+        \      <distance>-1</distance>\n      <num-connections>85</num-connections>\n\
+        \      <num-connections-capped>false</num-connections-capped>\n      <location>\n\
+        \        <name>Coventry, United Kingdom</name>\n        <country>\n      \
+        \    <code>gb</code>\n        </country>\n      </location>\n      <industry>Information\
+        \ Technology and Services</industry>\n      <positions total=\"1\">\n    \
+        \    <position>\n          <company>\n            <name>Voicepath</name>\n\
+        \            <type>Privately Held</type>\n            <industry>Information\
+        \ Technology and Services</industry>\n          </company>\n        </position>\n\
+        \      </positions>\n      <public-profile-url>http://www.linkedin.com/pub/david-blower/4/85/664</public-profile-url>\n\
+        \      <picture-url>http://m3.licdn.com/mpr/mprx/0_W1fpiDzyJUUW1_XqFNOfim6-MxyIl5vqIqR_imF2QseRm3CNLz0rSaPGBApq-CN4erDG2dzunwZ2</picture-url>\n\
+        \    </person>\n    <person>\n      <id>o7greJF9eL</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Group Finance Director\
+        \ at Jephson Housing Association Group</headline>\n      <distance>-1</distance>\n\
+        \      <num-connections>31</num-connections>\n      <num-connections-capped>false</num-connections-capped>\n\
+        \      <location>\n        <name>Coventry, United Kingdom</name>\n       \
+        \ <country>\n          <code>gb</code>\n        </country>\n      </location>\n\
+        \      <industry>Nonprofit Organization Management</industry>\n      <positions\
+        \ total=\"1\">\n        <position>\n          <company>\n            <name>Jephson\
+        \ Housing Association Group</name>\n            <industry>Nonprofit Organization\
+        \ Management</industry>\n          </company>\n        </position>\n     \
+        \ </positions>\n      <public-profile-url>http://www.linkedin.com/pub/david-blower/13/578/825</public-profile-url>\n\
+        \    </person>\n    <person>\n      <id>z0T6iFg3Es</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Associate, Project Director/Senior\
+        \ Archaeologist at Golder Associates Ltd.</headline>\n      <distance>-1</distance>\n\
+        \      <num-connections>76</num-connections>\n      <num-connections-capped>false</num-connections-capped>\n\
+        \      <location>\n        <name>Calgary, Canada Area</name>\n        <country>\n\
+        \          <code>ca</code>\n        </country>\n      </location>\n      <industry>Environmental\
+        \ Services</industry>\n      <positions total=\"1\">\n        <position>\n\
+        \          <company>\n            <name>Golder Associates Ltd.</name>\n  \
+        \          <type>Privately Held</type>\n            <industry>Environmental\
+        \ Services</industry>\n          </company>\n        </position>\n      </positions>\n\
+        \      <public-profile-url>http://www.linkedin.com/pub/david-blower/14/86b/949</public-profile-url>\n\
+        \      <picture-url>http://m3.licdn.com/mpr/mprx/0_UiHHf62i50gfRITHUhIRf5wmFpomUIrHMGpBf5Iy4sOYk7FecL4XTLxtdAEl42AXsho9hGz5-a9l</picture-url>\n\
+        \    </person>\n    <person>\n      <id>oZlwnbDTxs</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>Business Development\
+        \ Manager at MIDAS</headline>\n      <distance>-1</distance>\n      <num-connections>16</num-connections>\n\
+        \      <num-connections-capped>false</num-connections-capped>\n      <location>\n\
+        \        <name>Manchester, United Kingdom</name>\n        <country>\n    \
+        \      <code>gb</code>\n        </country>\n      </location>\n      <industry>Public\
+        \ Policy</industry>\n      <positions total=\"1\">\n        <position>\n \
+        \         <company>\n            <name>MIDAS</name>\n            <industry>Public\
+        \ Policy</industry>\n          </company>\n        </position>\n      </positions>\n\
+        \      <public-profile-url>http://www.linkedin.com/pub/david-blower/9/472/b7a</public-profile-url>\n\
+        \    </person>\n    <person>\n      <id>-0bv68x5tb</id>\n      <first-name>David</first-name>\n\
+        \      <last-name>Blower</last-name>\n      <headline>PRESIDENT at CPM LANDSCAPING,\
+        \ INC. and Owner, CPM LANDSCAPING, INC.</headline>\n      <distance>-1</distance>\n\
+        \      <num-connections>62</num-connections>\n      <num-connections-capped>false</num-connections-capped>\n\
+        \      <location>\n        <name>Greater Philadelphia Area</name>\n      \
+        \  <country>\n          <code>us</code>\n        </country>\n      </location>\n\
+        \      <industry>Construction</industry>\n      <positions total=\"1\">\n\
+        \        <position>\n          <company>\n            <name>CPM LANDSCAPING,\
+        \ INC.</name>\n            <industry>Consumer Services</industry>\n      \
+        \    </company>\n        </position>\n      </positions>\n      <public-profile-url>http://www.linkedin.com/pub/david-blower/3/954/bb9</public-profile-url>\n\
+        \      <picture-url>http://m3.licdn.com/mpr/mprx/0_0-CI4PB7T_PmAM280vG44A6YiiNuPVg8jnnN4AXfp58yuYEhPqtFnlK3DaqPrjyuOA8zcnnoYrlT</picture-url>\n\
+        \    </person>\n  </people>\n</people-search>\n"}
+    headers: {content-type: text/xml;charset=UTF-8, date: 'Fri, 01 Mar 2013 13:01:01
+        GMT', server: Apache-Coyote/1.1, transfer-encoding: chunked, vary: '*', x-li-format: xml,
+      x-li-request-id: 3U1SSMX3SK}
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers: {Connection: close, Host: api.linkedin.com, User-Agent: Python-urllib/2.7}
+    method: GET
+    url: /v1/people-search:(people:(id,first-name,last-name,headline,distance,num-connections,num-connections-capped,location:(name,country:(code)),industry,positions:(company:(name,type,size,industry,ticker)),public-profile-url,picture-url))?first-name=Chris&last-name=Jones&oauth2_access_token=fake
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n\
+        <error>\n  <status>401</status>\n  <timestamp>1362147942989</timestamp>\n\
+        \  <request-id>35WKHN5DXY</request-id>\n  <error-code>0</error-code>\n  <message>Invalid\
+        \ access token.</message>\n</error>\n"}
+    headers: {content-length: '245', content-type: text/xml;charset=UTF-8, date: 'Fri,
+        01 Mar 2013 14:25:42 GMT', server: Apache-Coyote/1.1, vary: '*', x-li-format: xml,
+      x-li-request-id: 35WKHN5DXY}
+    status: {code: 401, message: Unauthorized}
