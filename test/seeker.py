@@ -8,7 +8,7 @@ def setUp():
   os.system('python code/seeker.py --limit 1')
   scraperwiki.sqlite.execute('DROP TABLE people')
 
-def ensure_seeker_find_people():
+def ensure_seeker_finds_people():
   with vcr.use_cassette('fixtures/people.yaml'):
     from code import seeker
     seeker.do_work(1)

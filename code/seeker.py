@@ -11,8 +11,10 @@ import getopt
 import json
 import sys
 import urllib
+import urllib2
+from datetime import datetime
+from lxml import html
 
-import requests
 import scraperwiki
 
 def main(argv=None):
@@ -26,12 +28,20 @@ def main(argv=None):
     do_work(limit)
 
 def do_work(limit):
-    scraperwiki.sqlite.execute("""CREATE TABLE IF NOT EXISTS 
-      people (id, scraped)""")
+    #TODO: factor into master dict of colnames/css selectors
+    scraperwiki.sqlite.execute("""CREATE TABLE IF NOT EXISTS
+      people (id, source_id, scraped, name, headline, distance,
+              num_connections, num_connections_capped,
+              location_name, location_country_code,
+              industry, company_name, company_type,
+              company_size, company_industry, company_ticker,
+              public_profile_url,
+              picture_url)""")
     access_token = json.load(open('access_token.json'))['access_token']
     worklist = scraperwiki.sqlite.select(
-      """* FROM source LEFT JOIN people
-        ON source.id = people.id ORDER BY scraped
+      """source.name AS name, source.id AS source_id
+        FROM source LEFT JOIN people
+        ON source.id = people.source_id ORDER BY scraped
         LIMIT ?""", [limit])
     for person in worklist:
         firstname = person['name'].split()[0]
@@ -49,9 +59,42 @@ def do_work(limit):
           "picture-url")
         baseurl = "https://api.linkedin.com/v1/people-search:(people:(%s))" % fields
         url = baseurl + '?' + urllib.urlencode(params)
-        r = requests.get(url)
-        xml = r.text
-        print xml
+        r = urllib2.urlopen(url).read()
+        save_first_person(source_id=person['source_id'], xml=r)
+
+def save_first_person(source_id, xml):
+  doc = html.fromstring(xml)
+  person = doc.cssselect("person")[0]
+  # TODO: don't save private/empty IDs
+  row = dict(
+    id = person.cssselect('id')[0].text,
+    source_id = source_id,
+    scraped = datetime.now(),
+    name = "%s %s" % (text_or_none('first-name', person), text_or_none('last-name', person)),
+    headline = text_or_none('headline', person),
+    distance = text_or_none('distance', person),
+    num_connections = text_or_none('num-connections', person),
+    num_connections_capped = text_or_none('num-connections-capped', person),
+    location_name = text_or_none('location name', person),
+    location_country_code = text_or_none('location country code', person),
+    industry = text_or_none('industry', person),
+    company_name = text_or_none('positions name', person),
+    company_type = text_or_none('positions type', person),
+    company_size = text_or_none('positions size', person),
+    company_industry = text_or_none('positions industry', person),
+    company_ticker = text_or_none('positions ticker', person),
+    public_profile_url = text_or_none('public-profile-url', person),
+    picture_url = text_or_none('picture-url', person)
+  )
+  scraperwiki.sqlite.save(['id'], row, 'people')
+
+def text_or_none(selector, doc):
+    element = doc.cssselect(selector)
+    if len(element) > 0:
+      return element[0].text
+    else:
+      return None
+
 
 if __name__ == '__main__':
     main()
