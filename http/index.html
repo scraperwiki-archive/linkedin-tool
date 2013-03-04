@@ -6,6 +6,21 @@
     <meta http-equiv="cleartype" content="on">
     <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
     <link rel="stylesheet" href="//x.scraperwiki.com/style/scraperwiki.css">
+    <style type="text/css" rel="stylesheet">
+    body {
+      padding: 20px;
+    }
+    textarea {
+      height: 150px;
+      width: 250px;
+    }
+    .last span {
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 
     <script src="https://x.scraperwiki.com/js/scraperwiki.js"></script>
@@ -18,7 +33,7 @@
          <p>
            <textarea></textarea>
          </p>
-         <p>
+         <p class="last">
            <button class="btn btn-primary" type="button" id="authenticate">Import</button>
          </p>
      </form>
@@ -40,33 +55,39 @@ populateTextArea = ->
     text = list.join('\n')
     $('textarea').val(text)
 
+runSeeker = ->
+  scraperwiki.exec("tool/code/seeker.py --limit 100").success (data, textStatus, jqXHR) ->
+    console.log data
+    $('#authenticate').removeClass('loading').text('Import')
+    scraperwiki.alert "Great!", "Matching profiles have been imported from LinkedIn."
+  , error: (jqXHR, textStatus, errorThrown) ->
+    console.warn textStatus, errorThrown
+
+alertAuthenticated = ->
+  $('.last').append('<span><i class="icon-ok"></i> Authenticated</span>')
+
+importNames = (callback) ->
+  scraperwiki.exec("cat 2>/dev/null access_token.json").success (data) ->
+    if not data.length
+      # Don't have access_tokens yet, so start the process
+      # of getting them.
+      getClientIdAndSecret (err, keys) ->
+        scraperwiki.tool.getURL (url) ->
+          params =
+            response_type: 'code'
+            client_id: keys.id
+            scope: 'r_network'
+            state: 'abc'
+            redirect_uri: url
+          qs = $.io.object(params).query()
+          target = "https://www.linkedin.com/uas/oauth2/authorization?#{qs}"
+          scraperwiki.tool.redirect target
+    else
+      alertAuthenticated()
+      runSeeker()
+
 $ ->
   populateTextArea()
-  importNames = (callback) ->
-    scraperwiki.exec("cat 2>/dev/null access_token.json").success (data) ->
-      if not data.length
-        # Don't have access_tokens yet, so start the process
-        # of getting them.
-        getClientIdAndSecret (err, keys) ->
-          scraperwiki.tool.getURL (url) ->
-            params =
-              response_type: 'code'
-              client_id: keys.id
-              scope: 'r_network'
-              state: 'abc'
-              redirect_uri: url
-            qs = $.io.object(params).query()
-            target = "https://www.linkedin.com/uas/oauth2/authorization?#{qs}"
-            scraperwiki.tool.redirect target
-      else
-        alertAuthenticated()
-        runSeeker()
-
-  $('#authenticate').on 'click', ->
-    $(@).addClass('loading').text('Importing')
-    importNames()
-    escapedNames = scraperwiki.shellEscape $('textarea').val()
-    scraperwiki.exec("echo #{escapedNames} | python tool/code/namestodb.py")
 
   scraperwiki.tool.getURL (url) ->
     qs = url.match(/[?](.*)/)
@@ -104,11 +125,12 @@ $ ->
       # Must be viewing the tool settings, possibly having
       # just been installed.
 
-runSeeker = ->
-  scraperwiki.exec "tool/code/seeker.py --limit 100"
+  $('#authenticate').on 'click', ->
+    $(@).addClass('loading').text('Importing')
+    importNames()
+    escapedNames = scraperwiki.shellEscape $('textarea').val()
+    scraperwiki.exec("echo #{escapedNames} | python tool/code/namestodb.py")
 
-alertAuthenticated = ->
-  scraperwiki.alert "Authenticated", "Able to read data from LinkedIn"
         </script>
 
       </body>
