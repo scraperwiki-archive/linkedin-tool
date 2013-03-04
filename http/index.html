@@ -34,7 +34,14 @@ getClientIdAndSecret = (callback) ->
     keys = JSON.parse data
     callback null, {id: keys.apiKey, secret: keys.secretKey}
 
+populateTextArea = ->
+  scraperwiki.sql("select name from source").success (data) ->
+    list = (p.name for p in data)
+    text = list.join('\n')
+    $('textarea').val(text)
+
 $ ->
+  populateTextArea()
   importNames = (callback) ->
     scraperwiki.exec("cat 2>/dev/null access_token.json").success (data) ->
       if not data.length

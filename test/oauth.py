@@ -25,12 +25,20 @@ def ensure_there_is_a_textarea():
       assert tool_content.is_element_present_by_css('textarea', wait_time=10)
       # TODO: move
       tool_content.execute_script("scraperwiki.exec('rm access_token.json')")
+      tool_content.execute_script("scraperwiki.exec('rm scraperwiki.sqlite')")
+      browser.reload()
+
+source_list = """P Parker
+K Clark
+B Wayne"""
 
 def it_should_redirect_to_linkedin_when_auth_clicked():
   container = browser.find_by_css('iframe').first
   with browser.get_iframe(container['name']) as container:
     tool_content = container.find_by_css('iframe').first
     with container.get_iframe(tool_content['name']) as tool_content:
+      textarea = tool_content.find_by_css('textarea')[0]
+      textarea.fill(source_list)
       auth_button = tool_content.find_by_css('#authenticate')
       time.sleep(1)
       auth_button.click()
@@ -52,3 +60,14 @@ def ensure_tool_tells_user_that_it_is_authenticated():
     tool_content = container.find_by_css('iframe').first
     with container.get_iframe(tool_content['name']) as tool_content:
       assert tool_content.is_text_present('Authenticated', wait_time=7)
+
+def ensure_textarea_is_already_populated():
+  container = browser.find_by_css('iframe').first
+  with browser.get_iframe(container['name']) as container:
+    tool_content = container.find_by_css('iframe').first
+    with container.get_iframe(tool_content['name']) as tool_content:
+      
+      textarea = tool_content.find_by_css('textarea')[0]
+      print "textarea", repr(textarea.value)
+      print "source_list", repr(source_list)
+      assert textarea.value == source_list
