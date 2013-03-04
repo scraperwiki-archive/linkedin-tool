@@ -3,7 +3,7 @@ import time
 
 from splinter import Browser
 
-browser = Browser()
+browser = Browser(os.environ.get('SPLINTER_BROWSER', 'firefox'))
 
 def setUp():
   browser.cookies.delete()
