@@ -52,6 +52,7 @@ $ ->
             target = "https://www.linkedin.com/uas/oauth2/authorization?#{qs}"
             scraperwiki.tool.redirect target
       else
+        alertAuthenticated()
         runSeeker()
 
   $('#authenticate').on 'click', ->
@@ -81,6 +82,7 @@ $ ->
           access_qs = $.io.object(access_params).query()
           target = "https://api.linkedin.com/uas/oauth2/accessToken?#{access_qs}"
           scraperwiki.exec "curl #{scraperwiki.shellEscape(target)} > access_token.json", ->
+            alertAuthenticated()
             runSeeker()
             # TODO: cron job, show loading button
       else if params.error and params.state
@@ -99,7 +101,7 @@ runSeeker = ->
   scraperwiki.exec "tool/code/seeker.py --limit 100"
 
 alertAuthenticated = ->
-  scraperwiki.alert "Authenticated", "Reading data from LinkedIn"
+  scraperwiki.alert "Authenticated", "Able to read data from LinkedIn"
         </script>
 
       </body>
