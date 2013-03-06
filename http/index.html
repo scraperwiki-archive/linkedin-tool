@@ -62,7 +62,8 @@ runSeeker = ->
   scraperwiki.exec("tool/code/seeker.py --limit 100").success (data, textStatus, jqXHR) ->
     console.log data
     $('#authenticate').removeClass('loading').text('Import')
-    scraperwiki.alert "Great!", "Matching profiles have been imported from LinkedIn."
+    scraperwiki.tool.redirect "/dataset/#{scraperwiki.box}"
+    # scraperwiki.alert "Great!", "Matching profiles have been imported from LinkedIn."
   , error: (jqXHR, textStatus, errorThrown) ->
     console.warn textStatus, errorThrown
 
