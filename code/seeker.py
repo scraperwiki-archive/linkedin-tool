@@ -7,14 +7,14 @@ We expect this script to be run from cron, but you can run it
 whenever you like.
 """
 
+from datetime import datetime
 import getopt
 import json
 import sys
 import urllib
-import requests
-from datetime import datetime
-from lxml import html
 
+from lxml import html
+import requests
 import scraperwiki
 
 def main(argv=None):
@@ -61,6 +61,16 @@ def do_work(limit):
         url = baseurl + '?' + urllib.urlencode(params)
         r = requests.get(url)
         save_first_person(source_id=person['source_id'], xml=r.content)
+        progress = scraperwiki.sqlite.select("""count(*) as source,
+          (select count(*)from people) as people from source""")
+        progress = progress[0]
+        message = "got %(people)d/%(source)d" % progress
+        set_status(message)
+
+# Set status via scraperwiki.com API.
+def set_status(message, type='ok'):
+      requests.post("https://x.scraperwiki.com/api/status",
+        data={'type':type, 'message':message})
 
 def save_first_person(source_id, xml):
   # open('search-results.xml','w').write(xml)
