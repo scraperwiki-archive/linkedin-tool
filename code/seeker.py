@@ -64,7 +64,7 @@ def do_work(limit):
         progress = scraperwiki.sqlite.select("""count(*) as source,
           (select count(*)from people) as people from source""")
         progress = progress[0]
-        message = "got %(people)d/%(source)d" % progress
+        message = "Read %(people)d/%(source)d" % progress
         set_status(message)
 
 # Set status via scraperwiki.com API.
