@@ -11,7 +11,7 @@ store each name in a sqlite table."""
 def main():
     for id,row in enumerate(sys.stdin):
         row = row.strip()
-        scraperwiki.sqlite.save(['id'], dict(name=row, id=id), table_name="source")
+        scraperwiki.sql.save(['id'], dict(name=row, id=id), table_name="source")
 
 if __name__ == '__main__':
     main()

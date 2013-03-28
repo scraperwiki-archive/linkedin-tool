@@ -29,7 +29,7 @@ def main(argv=None):
 
 def do_work(limit):
     #TODO: factor into master dict of colnames/css selectors
-    scraperwiki.sqlite.execute("""CREATE TABLE IF NOT EXISTS
+    scraperwiki.sql.execute("""CREATE TABLE IF NOT EXISTS
       people (id, source_id, scraped, name, headline, distance,
               num_connections, num_connections_capped,
               location_name, location_country_code,
@@ -38,7 +38,7 @@ def do_work(limit):
               public_profile_url,
               picture_url)""")
     access_token = json.load(open('access_token.json'))['access_token']
-    worklist = scraperwiki.sqlite.select(
+    worklist = scraperwiki.sql.select(
       """source.name AS name, source.id AS source_id
         FROM source LEFT JOIN people
         ON source.id = people.source_id ORDER BY scraped
@@ -61,7 +61,7 @@ def do_work(limit):
         url = baseurl + '?' + urllib.urlencode(params)
         r = requests.get(url)
         save_first_person(source_id=person['source_id'], xml=r.content)
-        progress = scraperwiki.sqlite.select("""count(*) as source,
+        progress = scraperwiki.sql.select("""count(*) as source,
           (select count(*)from people) as people from source""")
         progress = progress[0]
         message = "Read %(people)d/%(source)d" % progress
@@ -97,7 +97,7 @@ def save_first_person(source_id, xml):
         picture_url = text_or_none('picture-url', person)
       )
       if row['id'] not in ['', 'private']:
-        scraperwiki.sqlite.save(['id'], row, 'people')
+        scraperwiki.sql.save(['id'], row, 'people')
         break
 
 def text_or_none(selector, doc):
