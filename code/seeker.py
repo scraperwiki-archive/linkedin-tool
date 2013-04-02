@@ -44,11 +44,8 @@ def do_work(limit):
         ON source.id = people.source_id ORDER BY scraped
         LIMIT ?""", [limit])
     for person in worklist:
-        firstname = person['name'].split()[0]
-        lastname = person['name'].split()[-1]
         params = {
-          'first-name': firstname,
-          'last-name': lastname,
+          'keywords': person['name'],
           'oauth2_access_token': access_token
         }
         fields = ("id,first-name,last-name,headline,"+
