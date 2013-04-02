@@ -58,8 +58,7 @@ def do_work(limit):
           "public-profile-url,"+
           "picture-url")
         baseurl = "https://api.linkedin.com/v1/people-search:(people:(%s))" % fields
-        url = baseurl + '?' + urllib.urlencode(params)
-        r = requests.get(url)
+        r = requests.get(baseurl, params=params)
         save_first_person(source_id=person['source_id'], xml=r.content)
         progress = scraperwiki.sql.select("""count(*) as source,
           (select count(*)from people) as people from source""")
