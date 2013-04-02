@@ -137,7 +137,7 @@ $ ->
     scraperwiki.exec "echo #{escapedNames} | python tool/code/namestodb.py", (data) ->
       if data != ""
         scraperwiki.alert "Unknown error!", data, true
-      importNames
+      importNames()
 
         </script>
 
