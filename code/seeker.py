@@ -44,6 +44,7 @@ def do_work(limit):
         ON source.id = people.source_id ORDER BY scraped
         LIMIT ?""", [limit])
     for person in worklist:
+        # print "working on", person
         params = {
           'keywords': person['name'],
           'oauth2_access_token': access_token
@@ -56,6 +57,7 @@ def do_work(limit):
           "picture-url")
         baseurl = "https://api.linkedin.com/v1/people-search:(people:(%s))" % fields
         r = requests.get(baseurl, params=params)
+        r.raise_for_status()
         save_first_person(source_id=person['source_id'], xml=r.content)
         progress = scraperwiki.sql.select("""count(*) as source,
           (select count(*)from people) as people from source""")
@@ -65,6 +67,7 @@ def do_work(limit):
 
 def save_first_person(source_id, xml):
   # open('search-results.xml','w').write(xml)
+  # print "save_first_person", xml
   doc = html.fromstring(xml)
   for person in doc.cssselect("person"):
       row = dict(
