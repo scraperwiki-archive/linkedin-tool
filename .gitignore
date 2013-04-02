@@ -5,3 +5,4 @@ include
 man
 *.pyc
 scraperwiki.sqlite
+.Python
