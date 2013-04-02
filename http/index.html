@@ -131,9 +131,8 @@ $ ->
 
   $('#authenticate').on 'click', ->
     $(@).addClass('loading').text('Importing')
-    importNames()
     escapedNames = scraperwiki.shellEscape $('textarea').val()
-    scraperwiki.exec("echo #{escapedNames} | python tool/code/namestodb.py")
+    scraperwiki.exec "echo #{escapedNames} | python tool/code/namestodb.py", importNames
 
         </script>
 
