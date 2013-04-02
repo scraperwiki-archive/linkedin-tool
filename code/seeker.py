@@ -65,12 +65,7 @@ def do_work(limit):
           (select count(*)from people) as people from source""")
         progress = progress[0]
         message = "Read %(people)d/%(source)d" % progress
-        set_status(message)
-
-# Set status via scraperwiki.com API.
-def set_status(message, type='ok'):
-  requests.post("https://x.scraperwiki.com/api/status",
-    data={'type':type, 'message':message})
+        scraperwiki.status('ok', message)
 
 def save_first_person(source_id, xml):
   # open('search-results.xml','w').write(xml)
