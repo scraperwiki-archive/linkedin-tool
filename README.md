@@ -13,4 +13,4 @@ Remember to `. activate`
 To run tests:
 
     . activate
-    specloud test/<test-name>.py
+    specloud test/*.py
