@@ -79,7 +79,8 @@ def save_first_person(source_id, xml):
         headline = text_or_none('headline', person),
         distance = text_or_none('distance', person),
         num_connections = text_or_none('num-connections', person),
-        num_connections_capped = text_or_none('num-connections-capped', person),
+        # don't include num_connections_capped as just confusing extra column
+        # num_connections_capped = text_or_none('num-connections-capped', person),
         location_name = text_or_none('location name', person),
         location_country_code = text_or_none('location country code', person),
         industry = text_or_none('industry', person),
