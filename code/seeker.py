@@ -69,8 +69,8 @@ def do_work(limit):
 
 # Set status via scraperwiki.com API.
 def set_status(message, type='ok'):
-      requests.post("https://x.scraperwiki.com/api/status",
-        data={'type':type, 'message':message})
+  requests.post("https://x.scraperwiki.com/api/status",
+    data={'type':type, 'message':message})
 
 def save_first_person(source_id, xml):
   # open('search-results.xml','w').write(xml)
