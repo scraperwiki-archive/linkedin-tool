@@ -32,10 +32,6 @@ source_list = """P Parker
 K Clark
 B Wayne"""
 
-shorter_list = """O Octavius
-L Luther
-"""
-
 def it_should_redirect_to_linkedin_when_auth_clicked():
   container = browser.find_by_css('iframe').first
   with browser.get_iframe(container['name']) as container:
@@ -76,21 +72,3 @@ def ensure_textarea_is_already_populated():
       print "source_list", repr(source_list)
       assert textarea.value == source_list
 
-def ensure_new_names_completely_replace_old_names():
-  container = browser.find_by_css('iframe').first
-  with browser.get_iframe(container['name']) as container:
-    tool_content = container.find_by_css('iframe').first
-    with container.get_iframe(tool_content['name']) as tool_content:
-
-      textarea = tool_content.find_by_css('textarea')[0]
-      textarea.fill(source_list)
-      browser.find_by_name('authorize').click()
-      browser.reload()
-
-  container = browser.find_by_css('iframe').first
-  with browser.get_iframe(container['name']) as container:
-    tool_content = container.find_by_css('iframe').first
-    with container.get_iframe(tool_content['name']) as tool_content:
-
-      textarea = tool_content.find_by_css('textarea')[0]
-      assert textarea.value == shorter_list
