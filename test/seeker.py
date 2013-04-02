@@ -8,9 +8,9 @@ from httpretty import HTTPretty, httprettified
 from code import seeker
 
 def setup_func():
-  os.system('python code/namestodb.py < people')
+  os.system('python code/namestodb.py < fixtures/people')
   os.system('python code/seeker.py --limit 1')
-  scraperwiki.sql.execute('DROP TABLE people')
+  scraperwiki.sql.execute('DROP TABLE IF EXISTS people')
   scraperwiki.sql.commit()
 
 @with_setup(setup_func)
