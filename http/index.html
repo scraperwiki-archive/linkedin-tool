@@ -48,30 +48,32 @@ requestAccessToken = ->
   grant_type: authorization_code
 
 getClientIdAndSecret = (callback) ->
-  scraperwiki.exec('cat ~/tool/oauth_keys.json').success (data) ->
+  scraperwiki.exec 'cat ~/tool/oauth_keys.json', (data) ->
     keys = JSON.parse data
     callback null, {id: keys.apiKey, secret: keys.secretKey}
 
 populateTextArea = ->
-  scraperwiki.sql("select name from source").success (data) ->
+  scraperwiki.sql "select name from source", (data) ->
     list = (p.name for p in data)
     text = list.join('\n')
     $('textarea').val(text)
 
+handleAjaxError = (jqXHR, textStatus, errorThrown) ->
+  console.warn textStatus, errorThrown
+
 runSeeker = ->
-  scraperwiki.exec("tool/code/seeker.py --limit 100").success (data, textStatus, jqXHR) ->
+  scraperwiki.exec "tool/code/seeker.py --limit 100", (data) ->
     console.log data
     $('#authenticate').removeClass('loading').text('Import')
     scraperwiki.tool.redirect "/dataset/#{scraperwiki.box}"
     # scraperwiki.alert "Great!", "Matching profiles have been imported from LinkedIn."
-  , error: (jqXHR, textStatus, errorThrown) ->
-    console.warn textStatus, errorThrown
+  , handleAjaxError
 
 alertAuthenticated = ->
   $('.last').append('<span><i class="icon-ok"></i> Authenticated</span>')
 
 importNames = (callback) ->
-  scraperwiki.exec("cat 2>/dev/null access_token.json").success (data) ->
+  scraperwiki.exec "cat 2>/dev/null access_token.json", (data) ->
     if not data.length
       # Don't have access_tokens yet, so start the process
       # of getting them.
