@@ -64,9 +64,11 @@ handleAjaxError = (jqXHR, textStatus, errorThrown) ->
 runSeeker = ->
   scraperwiki.exec "tool/code/seeker.py --limit 100", (data) ->
     console.log data
-    $('#authenticate').removeClass('loading').text('Import')
-    scraperwiki.tool.redirect "/dataset/#{scraperwiki.box}"
-    # scraperwiki.alert "Great!", "Matching profiles have been imported from LinkedIn."
+    if data != ""
+      scraperwiki.alert "Unknown error!", data, true
+    else
+      $('#authenticate').removeClass('loading').text('Import')
+      scraperwiki.tool.redirect "/dataset/#{scraperwiki.box}"
   , handleAjaxError
 
 alertAuthenticated = ->
