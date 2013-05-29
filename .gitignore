@@ -4,5 +4,5 @@ lib
 include
 man
 *.pyc
-scraperwiki.sqlite
 .Python
+.*.swp
