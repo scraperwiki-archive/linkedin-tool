@@ -1,6 +1,6 @@
 {
-  "displayName": "LinkedIn People Search",
-  "description": "Find people on LinkedIn",
+  "displayName": "Search for people",
+  "description": "Find people in your network on LinkedIn by their name",
   "icon": "https://s3-eu-west-1.amazonaws.com/sw-icons/tool-icon-linkedin-people.png",
   "color": "#0F53B8"
 }
