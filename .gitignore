@@ -6,3 +6,4 @@ man
 *.pyc
 .Python
 .*.swp
+scraperwiki.sqlite
